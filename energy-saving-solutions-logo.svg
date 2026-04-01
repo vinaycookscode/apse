@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 260" width="600" height="260">
+  <defs>
+    <style>
+      .logo-green { fill: #00a651; }
+      .logo-stroke { stroke: #00a651; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .logo-text { fill: #00a651; font-family: 'Arial Black', 'Helvetica Neue', Arial, sans-serif; font-weight: 900; }
+    </style>
+  </defs>
+
+  <g transform="translate(20, 5) scale(1.0)">
+    <!-- ===== RECYCLING ARROWS (two curved arrows forming circular pattern) ===== -->
+    
+    <!-- Arrow arc 1: sweeps from upper-left going clockwise to upper-right -->
+    <path class="logo-stroke" stroke-width="11"
+      d="M 58,72 A 48,48 0 0 1 138,38" />
+    <!-- Arrowhead 1 pointing right/downward -->
+    <polygon class="logo-green" 
+      points="135,24 148,42 130,46" />
+
+    <!-- Arrow arc 2: sweeps from upper-right going clockwise down to lower-right -->
+    <path class="logo-stroke" stroke-width="11"
+      d="M 142,48 A 48,48 0 0 1 110,108" />
+    <!-- Arrowhead 2 pointing left/downward -->
+    <polygon class="logo-green"
+      points="100,100 116,114 118,96" />
+
+    <!-- Arrow arc 3: sweeps from lower going clockwise up to upper-left -->
+    <path class="logo-stroke" stroke-width="11"
+      d="M 104,104 A 48,48 0 0 1 50,64" />
+    <!-- Arrowhead 3 pointing upward/left -->
+    <polygon class="logo-green"
+      points="40,74 54,56 58,74" />
+
+    <!-- ===== HUMAN FIGURE ===== -->
+    
+    <!-- Head -->
+    <circle class="logo-green" cx="100" cy="116" r="13" />
+
+    <!-- Body: S-curve torso flowing from head downward -->
+    <!-- The figure has a dynamic curved pose - torso curves left, then hips curve right -->
+    <path class="logo-stroke" stroke-width="9.5"
+      d="M 100,129
+         C 96,140 82,150 74,162
+         C 66,174 68,182 76,190
+         C 84,198 88,205 84,218
+         C 80,228 72,238 66,248" />
+
+    <!-- Left arm: extends upward and to the left, reaching toward recycling arrows -->
+    <path class="logo-stroke" stroke-width="8"
+      d="M 84,152
+         C 72,140 56,128 42,120
+         C 34,116 26,118 24,126" />
+
+    <!-- Right arm: extends upward and to the right -->
+    <path class="logo-stroke" stroke-width="8"
+      d="M 90,146
+         C 102,134 118,124 132,118" />
+
+    <!-- Left leg: extends down-left -->
+    <path class="logo-stroke" stroke-width="7.5"
+      d="M 66,248
+         C 58,254 48,258 36,260" />
+
+    <!-- Right leg: extends down-right -->
+    <path class="logo-stroke" stroke-width="7.5"
+      d="M 76,232
+         C 86,240 100,248 114,254" />
+  </g>
+
+  <!-- ===== TEXT: ENERGY SAVING SOLUTIONS ===== -->
+  <text class="logo-text" letter-spacing="2.5">
+    <tspan x="205" y="105" font-size="52">ENERGY</tspan>
+    <tspan x="205" y="162" font-size="52">SAVING</tspan>
+    <tspan x="205" y="219" font-size="52">SOLUTIONS</tspan>
+  </text>
+
+</svg>

@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advance Power Solution & Enterprises — Manage Energy, Save Money</title>
+  <meta name="description"
+    content="APSE specializes in electrical panel manufacturing, energy efficiency consulting, and power solutions. Serving industries with excellence and innovation.">
+
+  <link rel="stylesheet" href="fonts/fonts.css">
+
+  <style>
+    /* ========== CSS Variables / Design Tokens ========== */
+    :root {
+      --clr-bg-dark: #050d1a;
+      --clr-bg-deep: #0a1628;
+      --clr-accent-1: #00d4ff;
+      --clr-accent-2: #7c3aed;
+      --clr-accent-3: #f472b6;
+      --clr-accent-4: #34d399;
+      --clr-glass-bg: rgba(255, 255, 255, 0.06);
+      --clr-glass-border: rgba(255, 255, 255, 0.12);
+      --clr-glass-highlight: rgba(255, 255, 255, 0.08);
+      --clr-text-primary: #f0f4f8;
+      --clr-text-secondary: rgba(240, 244, 248, 0.65);
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 24px;
+      --transition-smooth: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* ========== Reset ========== */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--clr-bg-dark);
+      color: var(--clr-text-primary);
+      overflow-x: hidden;
+      line-height: 1.7;
+    }
+
+    /* ========== Animated Background ========== */
+    .bg-gradient-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .bg-gradient-canvas::before {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(0, 212, 255, 0.2), transparent 70%);
+      top: -150px;
+      left: -100px;
+      animation: floatBlob1 18s ease-in-out infinite;
+    }
+
+    .bg-gradient-canvas::after {
+      content: '';
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.18), transparent 70%);
+      bottom: -100px;
+      right: -100px;
+      animation: floatBlob2 22s ease-in-out infinite;
+    }
+
+    .bg-blob-3 {
+      position: fixed;
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, rgba(244, 114, 182, 0.12), transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: floatBlob3 20s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    @keyframes floatBlob1 {
+
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      33% {
+        transform: translate(80px, 60px) scale(1.1);
+      }
+
+      66% {
+        transform: translate(-40px, 80px) scale(0.95);
+      }
+    }
+
+    @keyframes floatBlob2 {
+
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      33% {
+        transform: translate(-60px, -50px) scale(1.15);
+      }
+
+      66% {
+        transform: translate(50px, -60px) scale(0.9);
+      }
+    }
+
+    @keyframes floatBlob3 {
+
+      0%,
+      100% {
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      50% {
+        transform: translate(-45%, -55%) scale(1.2);
+      }
+    }
+
+    /* ========== Glass Card Mixin ========== */
+    .glass {
+      background: var(--clr-glass-bg);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--clr-glass-border);
+      border-radius: var(--radius-md);
+      transition: var(--transition-smooth);
+    }
+
+    .glass:hover {
+      background: var(--clr-glass-highlight);
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 212, 255, 0.06);
+    }
+
+    /* ========== Header ========== */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 48px;
+      background: rgba(5, 13, 26, 0.7);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      transition: var(--transition-smooth);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 40px;
+      width: auto;
+      filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.3));
+      transition: var(--transition-smooth);
+    }
+
+    .logo img:hover {
+      filter: drop-shadow(0 0 14px rgba(0, 212, 255, 0.6));
+    }
+
+    @keyframes pulse-glow {
+
+      0%,
+      100% {
+        filter: drop-shadow(0 0 6px rgba(0, 212, 255, 0.5));
+      }
+
+      50% {
+        filter: drop-shadow(0 0 16px rgba(0, 212, 255, 0.9));
+      }
+    }
+
+    nav {
+      display: flex;
+      gap: 8px;
+    }
+
+    nav a {
+      color: var(--clr-text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+      padding: 8px 18px;
+      border-radius: 50px;
+      transition: var(--transition-smooth);
+      position: relative;
+    }
+
+    nav a:hover {
+      color: var(--clr-text-primary);
+      background: rgba(0, 212, 255, 0.1);
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--clr-accent-1), var(--clr-accent-2));
+      transition: var(--transition-smooth);
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    nav a:hover::after {
+      width: 50%;
+    }
+
+    /* Mobile menu toggle */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      z-index: 1001;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 26px;
+      height: 2px;
+      background: var(--clr-text-primary);
+      margin: 6px 0;
+      border-radius: 2px;
+      transition: var(--transition-smooth);
+    }
+
+    /* ========== Hero Section ========== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 80vw;
+      height: 80vw;
+      max-width: 900px;
+      max-height: 900px;
+      transform: translate(-50%, -50%);
+      background: conic-gradient(from 0deg,
+          rgba(0, 212, 255, 0.08),
+          rgba(124, 58, 237, 0.08),
+          rgba(244, 114, 182, 0.06),
+          rgba(52, 211, 153, 0.06),
+          rgba(0, 212, 255, 0.08));
+      border-radius: 50%;
+      animation: heroRotate 30s linear infinite;
+      filter: blur(60px);
+    }
+
+    @keyframes heroRotate {
+      from {
+        transform: translate(-50%, -50%) rotate(0deg);
+      }
+
+      to {
+        transform: translate(-50%, -50%) rotate(360deg);
+      }
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--clr-accent-1);
+      background: rgba(0, 212, 255, 0.08);
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      margin-bottom: 32px;
+      animation: fadeSlideUp 0.8s ease-out;
+      letter-spacing: 0.5px;
+    }
+
+    .hero h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(2.2rem, 5.5vw, 4.2rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #ffffff 0%, var(--clr-accent-1) 50%, var(--clr-accent-2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: fadeSlideUp 0.8s ease-out 0.15s both;
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--clr-text-secondary);
+      max-width: 600px;
+      margin-bottom: 40px;
+      animation: fadeSlideUp 0.8s ease-out 0.3s both;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 36px;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--clr-bg-dark);
+      background: linear-gradient(135deg, var(--clr-accent-1), var(--clr-accent-4));
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+      animation: fadeSlideUp 0.8s ease-out 0.45s both;
+      box-shadow: 0 8px 32px rgba(0, 212, 255, 0.25);
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 12px 48px rgba(0, 212, 255, 0.35);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--clr-text-secondary);
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      animation: fadeSlideUp 0.8s ease-out 0.6s both;
+    }
+
+    .scroll-indicator .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--clr-accent-1), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+
+      0%,
+      100% {
+        opacity: 0.3;
+        height: 30px;
+      }
+
+      50% {
+        opacity: 1;
+        height: 50px;
+      }
+    }
+
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ========== Sections ========== */
+    .section {
+      padding: 100px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-header .label {
+      display: inline-block;
+      font-family: var(--font-heading);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      padding: 6px 18px;
+      border-radius: 50px;
+      margin-bottom: 16px;
+    }
+
+    .label-cyan {
+      color: var(--clr-accent-1);
+      background: rgba(0, 212, 255, 0.1);
+      border: 1px solid rgba(0, 212, 255, 0.2);
+    }
+
+    .label-purple {
+      color: var(--clr-accent-2);
+      background: rgba(124, 58, 237, 0.1);
+      border: 1px solid rgba(124, 58, 237, 0.2);
+    }
+
+    .label-pink {
+      color: var(--clr-accent-3);
+      background: rgba(244, 114, 182, 0.1);
+      border: 1px solid rgba(244, 114, 182, 0.2);
+    }
+
+    .label-green {
+      color: var(--clr-accent-4);
+      background: rgba(52, 211, 153, 0.1);
+      border: 1px solid rgba(52, 211, 153, 0.2);
+    }
+
+    .section-header h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--clr-text-primary), var(--clr-accent-1));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-header p {
+      color: var(--clr-text-secondary);
+      max-width: 600px;
+      margin: 12px auto 0;
+      font-size: 1.05rem;
+    }
+
+    /* ========== Glass Cards ========== */
+    .glass-card {
+      background: var(--clr-glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--clr-glass-border);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      transition: var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    }
+
+    .glass-card:hover {
+      background: var(--clr-glass-highlight);
+      border-color: rgba(255, 255, 255, 0.18);
+      transform: translateY(-6px);
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 212, 255, 0.05);
+    }
+
+    .glass-card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 14px;
+      color: var(--clr-text-primary);
+    }
+
+    .glass-card p {
+      color: var(--clr-text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+
+    /* ========== About Section ========== */
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .about-text {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: 28px 16px;
+    }
+
+    .stat-card .stat-number {
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--clr-accent-1), var(--clr-accent-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 6px;
+    }
+
+    .stat-card .stat-label {
+      font-size: 0.8rem;
+      color: var(--clr-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* ========== Vision / Mission ========== */
+    .vision-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .vision-card {
+      position: relative;
+      padding: 40px;
+    }
+
+    .vision-card .icon-ring {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .icon-ring.cyan {
+      background: rgba(0, 212, 255, 0.1);
+      border: 1px solid rgba(0, 212, 255, 0.25);
+    }
+
+    .icon-ring.purple {
+      background: rgba(124, 58, 237, 0.1);
+      border: 1px solid rgba(124, 58, 237, 0.25);
+    }
+
+    .vision-card blockquote {
+      margin-top: 20px;
+      padding: 16px 20px;
+      border-left: 3px solid;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-style: italic;
+      font-size: 0.9rem;
+    }
+
+    .vision-card blockquote.cyan-border {
+      border-color: var(--clr-accent-1);
+      background: rgba(0, 212, 255, 0.04);
+      color: rgba(0, 212, 255, 0.8);
+    }
+
+    .vision-card blockquote.purple-border {
+      border-color: var(--clr-accent-2);
+      background: rgba(124, 58, 237, 0.04);
+      color: rgba(124, 58, 237, 0.85);
+    }
+
+    /* ========== Services Grid ========== */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .service-card {
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      cursor: default;
+      overflow: hidden;
+    }
+
+    .service-card .service-img-wrapper {
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+      position: relative;
+      background: #070e1c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .service-card .service-img-wrapper::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 50%, rgba(5, 13, 26, 0.7) 100%);
+      opacity: 0;
+      transition: var(--transition-smooth);
+      pointer-events: none;
+    }
+
+    .service-card:hover .service-img-wrapper::after {
+      opacity: 1;
+    }
+
+    .service-card .service-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 12px;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .service-card:hover .service-img-wrapper img {
+      transform: scale(1.1);
+    }
+
+    .service-card .service-text {
+      padding: 20px 24px;
+    }
+
+    .service-card .service-text h4 {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--clr-text-primary);
+      line-height: 1.4;
+    }
+
+    /* ========== Contact Section ========== */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .contact-info-card {
+      padding: 40px;
+    }
+
+    .contact-info-card h3 {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, var(--clr-accent-1), var(--clr-accent-4));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .contact-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .contact-row:last-child {
+      border-bottom: none;
+    }
+
+    .contact-row .contact-icon {
+      flex-shrink: 0;
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      background: rgba(0, 212, 255, 0.08);
+      border: 1px solid rgba(0, 212, 255, 0.15);
+    }
+
+    .contact-row .contact-detail {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .contact-row .contact-detail .detail-label {
+      font-size: 0.75rem;
+      color: var(--clr-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 2px;
+    }
+
+    .contact-row .contact-detail .detail-value {
+      font-size: 0.95rem;
+      color: var(--clr-text-primary);
+      word-break: break-word;
+    }
+
+    .map-placeholder {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+      min-height: 360px;
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), rgba(124, 58, 237, 0.05));
+      border: 1px solid var(--clr-glass-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .map-placeholder iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 360px;
+      border: none;
+      border-radius: var(--radius-lg);
+      filter: brightness(0.7) contrast(1.1) saturate(0.8);
+    }
+
+    /* ========== Divider ========== */
+    .section-divider {
+      height: 1px;
+      max-width: 1200px;
+      margin: 0 auto;
+      background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.15), rgba(124, 58, 237, 0.15), transparent);
+    }
+
+    /* ========== Footer ========== */
+    footer {
+      position: relative;
+      padding: 48px 24px 24px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.2), rgba(124, 58, 237, 0.2), transparent);
+    }
+
+    .footer-logo {
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .footer-logo img {
+      height: 48px;
+      width: auto;
+      filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.3));
+    }
+
+    .footer-tagline {
+      font-size: 0.85rem;
+      color: var(--clr-text-secondary);
+      margin-bottom: 24px;
+    }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* ========== Scroll Animations ========== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ========== Responsive Design ========== */
+
+    /* Tablet */
+    @media (max-width: 1024px) {
+      header {
+        padding: 14px 28px;
+      }
+
+      .about-content {
+        grid-template-columns: 1fr;
+      }
+
+      .vision-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      header {
+        padding: 12px 20px;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 75%;
+        max-width: 320px;
+        height: 100vh;
+        background: rgba(10, 22, 40, 0.97);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        flex-direction: column;
+        padding: 80px 32px 32px;
+        gap: 4px;
+        transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        border-left: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      nav.open {
+        right: 0;
+      }
+
+      nav a {
+        font-size: 1.05rem;
+        padding: 14px 18px;
+        border-radius: var(--radius-sm);
+      }
+
+      .mobile-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+      }
+
+      .mobile-overlay.active {
+        display: block;
+      }
+
+      .hero {
+        padding: 100px 20px 60px;
+        min-height: 90vh;
+      }
+
+      .section {
+        padding: 60px 20px;
+      }
+
+      .glass-card {
+        padding: 28px;
+      }
+
+      .about-stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .service-card {
+        padding: 22px;
+      }
+    }
+
+    /* Small mobile */
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+
+      .hero p {
+        font-size: 0.95rem;
+      }
+
+      .hero-cta {
+        padding: 12px 28px;
+        font-size: 0.9rem;
+      }
+
+      .section-header h2 {
+        font-size: 1.5rem;
+      }
+
+      .about-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .stat-card .stat-number {
+        font-size: 1.8rem;
+      }
+
+      .glass-card {
+        padding: 22px;
+      }
+
+      .vision-card {
+        padding: 28px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Animated background blobs -->
+  <div class="bg-gradient-canvas"></div>
+  <div class="bg-blob-3"></div>
+
+  <!-- ========== HEADER ========== -->
+  <header id="top-header">
+    <div class="logo">
+      <img src="images/logo.svg" alt="APSE Logo">
+    </div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <nav id="mainNav">
+      <a href="#about" onclick="closeMobileMenu()">About</a>
+      <a href="#vision" onclick="closeMobileMenu()">Vision</a>
+      <a href="#services" onclick="closeMobileMenu()">Services</a>
+      <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+    </nav>
+    <div class="mobile-overlay" id="mobileOverlay" onclick="closeMobileMenu()"></div>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero" id="hero">
+    <div class="hero-badge">⚡ Powering Industries Since Inception</div>
+    <h1>Advance Power Solution<br>& Enterprises</h1>
+    <p>Delivering cutting-edge electrical panel manufacturing and energy-saving solutions — because every watt counts.
+    </p>
+    <a href="#services" class="hero-cta">Explore Our Services →</a>
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ========== ABOUT ========== -->
+  <section id="about" class="section">
+    <div class="section-header reveal">
+      <span class="label label-cyan">Who We Are</span>
+      <h2>Our Story</h2>
+      <p>Excellence, commitment, and innovation in every connection.</p>
+    </div>
+
+    <div class="about-content">
+      <div class="about-text">
+        <div class="glass-card reveal">
+          <h3>About APSE</h3>
+          <p>Advance Power Solution & Enterprises is an electrical energy-saving solution firm specializing in
+            electrical panel manufacturing and energy efficiency consulting.</p>
+          <br>
+          <p>We are known for excellence, commitment, accuracy, fault finding, punctuality, and strong customer
+            relationships. Our services include installation, testing, commissioning, preventive maintenance,
+            automation, and energy-saving solutions.</p>
+        </div>
+        <div class="glass-card reveal">
+          <h3>Our Team</h3>
+          <p>Our team consists of highly skilled professionals delivering value-added solutions with competitive
+            pricing. We continuously improve to serve our customers better and exceed expectations.</p>
+        </div>
+      </div>
+
+      <div class="about-stats">
+        <div class="glass-card stat-card reveal">
+          <div class="stat-number">1000+</div>
+          <div class="stat-label">Projects Delivered</div>
+        </div>
+        <div class="glass-card stat-card reveal">
+          <div class="stat-number">500+</div>
+          <div class="stat-label">Happy Clients</div>
+        </div>
+        <div class="glass-card stat-card reveal">
+          <div class="stat-number">50+</div>
+          <div class="stat-label">Services Offered</div>
+        </div>
+        <div class="glass-card stat-card reveal">
+          <div class="stat-number">24/7</div>
+          <div class="stat-label">Support Available</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ========== VISION & MISSION ========== -->
+  <section id="vision" class="section">
+    <div class="section-header reveal">
+      <span class="label label-purple">Our Purpose</span>
+      <h2>Vision & Mission</h2>
+      <p>Driven by innovation, guided by integrity.</p>
+    </div>
+
+    <div class="vision-grid">
+      <div class="glass-card vision-card reveal">
+        <div class="icon-ring cyan">🔭</div>
+        <h3>Our Vision</h3>
+        <p>Electricity is the cornerstone of a high-quality life. We aim to be a best-in-class provider of electrical
+          panels and solutions through innovation and continuous improvement.</p>
+        <br>
+        <p>Our focus is customer satisfaction, delivering hassle-free services, and making a meaningful impact on
+          quality of life.</p>
+        <blockquote class="cyan-border">"Empowering lives through reliable power solutions."</blockquote>
+      </div>
+
+      <div class="glass-card vision-card reveal">
+        <div class="icon-ring purple">🚀</div>
+        <h3>Our Mission</h3>
+        <p>We are committed to delivering high-quality products and services exceeding customer expectations with
+          integrity, reliability, and collaboration.</p>
+        <blockquote class="purple-border">"Delivering Results, Exceeding Expectations."</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ========== SERVICES ========== -->
+  <section id="services" class="section">
+    <div class="section-header reveal">
+      <span class="label label-pink">What We Offer</span>
+      <h2>Our Services</h2>
+      <p>Comprehensive electrical solutions tailored to your needs.</p>
+    </div>
+
+    <div class="services-grid">
+      <div class="glass-card service-card reveal">
+        <div class="service-img-wrapper"><img src="images/apfc_panels_1774690169350.png" alt="APFC Panels"
+            loading="lazy"></div>
+        <div class="service-text">
+          <h4>APFC Panels (Contactor Switch, Thyristor Switch, APFC System, RTPFC System & Hybrid System)</h4>
+        </div>
+      </div>
+      <div class="glass-card service-card reveal">
+        <div class="service-img-wrapper"><img src="images/plc_panels_1774690208927.png" alt="PLC Panels" loading="lazy">
+        </div>
+        <div class="service-text">
+          <h4>PLC Panels, Soft Starter Panels & Star Delta Starters</h4>
+        </div>
+      </div>
+      <div class="glass-card service-card reveal">
+        <div class="service-img-wrapper"><img src="images/mcc_panels_1774690224497.png" alt="MCC Panels" loading="lazy">
+        </div>
+        <div class="service-text">
+          <h4>MCC, PCC, PDB & VCC Panels</h4>
+        </div>
+      </div>
+      <div class="glass-card service-card reveal">
+        <div class="service-img-wrapper"><img src="images/generator_maintenance_1774690243767.png"
+            alt="Generator Maintenance" loading="lazy"></div>
+        <div class="service-text">
+          <h4>Generator, Alternator & Compressor Maintenance</h4>
+        </div>
+      </div>
+      <div class="glass-card service-card reveal">
+        <div class="service-img-wrapper"><img src="images/harmonic_filter_1774690271508.png" alt="Harmonic Filter"
+            loading="lazy"></div>
+        <div class="service-text">
+          <h4>Active Harmonic Filter (AHF) Panels</h4>
+        </div>
+      </div>
+      <div class="glass-card service-card reveal">
+        <div class="service-img-wrapper"><img src="images/voltage_stabilizer_1774690297756.png" alt="Voltage Stabilizer"
+            loading="lazy"></div>
+        <div class="service-text">
+          <h4>Servo Control Voltage Stabilizers (Oil & Air Cooled)</h4>
+        </div>
+      </div>
+      <div class="glass-card service-card reveal">
+        <div class="service-img-wrapper"><img src="images/line_retrofitting_1774690316163.png" alt="Line Retrofitting"
+            loading="lazy"></div>
+        <div class="service-text">
+          <h4>LT & HT Line Retrofitting</h4>
+        </div>
+      </div>
+      <div class="glass-card service-card reveal">
+        <div class="service-img-wrapper"><img src="images/installation_testing_1774690352636.png"
+            alt="Installation Testing" loading="lazy"></div>
+        <div class="service-text">
+          <h4>Installation, Testing & Commissioning</h4>
+        </div>
+      </div>
+      <div class="glass-card service-card reveal">
+        <div class="service-img-wrapper"><img src="images/thermography_panels_1774690367982.png" alt="Thermography"
+            loading="lazy"></div>
+        <div class="service-text">
+          <h4>Thermography of Panels</h4>
+        </div>
+      </div>
+      <div class="glass-card service-card reveal">
+        <div class="service-img-wrapper"><img src="images/switchgears_materials_1774690398543.png" alt="Switchgears"
+            loading="lazy"></div>
+        <div class="service-text">
+          <h4>Electrical Materials & Switchgears (ABB, Siemens, L&T, Schneider etc..)</h4>
+        </div>
+      </div>
+      <div class="glass-card service-card reveal">
+        <div class="service-img-wrapper"><img src="images/wires_cables_1774690426759.png" alt="Wires and Cables"
+            loading="lazy"></div>
+        <div class="service-text">
+          <h4>Polycab Wires & Cables Distribution</h4>
+        </div>
+      </div>
+      <div class="glass-card service-card reveal">
+        <div class="service-img-wrapper"><img src="images/motors_supply_1774690443005.png" alt="Motors Supply"
+            loading="lazy"></div>
+        <div class="service-text">
+          <h4>AC & DC Motors Supply</h4>
+        </div>
+      </div>
+      <div class="glass-card service-card reveal">
+        <div class="service-img-wrapper"><img src="images/transformer_services_1774690461122.png"
+            alt="Transformer Services" loading="lazy"></div>
+        <div class="service-text">
+          <h4>Transformer Services & Oil Filtration</h4>
+        </div>
+      </div>
+      <div class="glass-card service-card reveal">
+        <div class="service-img-wrapper"><img src="images/amc_audits_1774690476905.png" alt="AMC Audits" loading="lazy">
+        </div>
+        <div class="service-text">
+          <h4>AMC & Electrical Audits</h4>
+        </div>
+      </div>
+      <div class="glass-card service-card reveal">
+        <div class="service-img-wrapper"><img src="images/solar_solutions_1774690492364.png" alt="Solar Solutions"
+            loading="lazy"></div>
+        <div class="service-text">
+          <h4>Solar System Solutions</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ========== CONTACT ========== -->
+  <section id="contact" class="section">
+    <div class="section-header reveal">
+      <span class="label label-green">Get In Touch</span>
+      <h2>Contact Information</h2>
+      <p>Ready to power up your business? Reach out to us.</p>
+    </div>
+
+    <div class="contact-layout">
+      <div class="glass-card contact-info-card reveal">
+        <h3>Advance Power Solution & Enterprises</h3>
+
+        <div class="contact-row">
+          <div class="contact-icon">📍</div>
+          <div class="contact-detail">
+            <span class="detail-label">Address</span>
+            <span class="detail-value">Office: Shop No. 376, Muley I Square, Opp. Siemens Ltd., MIDC Ambad, Nashik –
+              10</span>
+            <p class="detail-value">Work: Plot no-19, Datir Mala, Ambad MIDC, Nashik</p>
+          </div>
+        </div>
+
+        <div class="contact-row">
+          <div class="contact-icon">📞</div>
+          <div class="contact-detail">
+            <span class="detail-label">Phone</span>
+            <span class="detail-value">9665266541</span>
+          </div>
+        </div>
+
+        <div class="contact-row">
+          <div class="contact-icon">✉️</div>
+          <div class="contact-detail">
+            <span class="detail-label">Email</span>
+            <span class="detail-value">apse.bagul@gmail.com</span>
+          </div>
+        </div>
+
+        <div class="contact-row">
+          <div class="contact-icon">🏢</div>
+          <div class="contact-detail">
+            <span class="detail-label">GSTIN</span>
+            <span class="detail-value">27AUKPB2893C2ZP</span>
+          </div>
+        </div>
+
+        <div class="contact-row">
+          <div class="contact-icon">📄</div>
+          <div class="contact-detail">
+            <span class="detail-label">UDYAM No</span>
+            <span class="detail-value">MH-23-0028399</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="map-placeholder reveal">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3748.5!2d73.78!3d19.99!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDU5JzI0LjAiTiA3M8KwNDYnNDguMCJF!5e0!3m2!1sen!2sin!4v1"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Location Map"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer>
+    <div class="footer-logo"><img src="images/logo.svg" alt="APSE Logo"></div>
+    <p class="footer-tagline">Manage Energy • Save Money</p>
+    <p class="footer-copy">© 2026 Advance Power Solution & Enterprises. All rights reserved.</p>
+  </footer>
+
+  <!-- ========== JavaScript ========== -->
+  <script>
+    // Mobile Menu
+    const menuToggle = document.getElementById('menuToggle');
+    const mainNav = document.getElementById('mainNav');
+    const mobileOverlay = document.getElementById('mobileOverlay');
+
+    menuToggle.addEventListener('click', () => {
+      mainNav.classList.toggle('open');
+      mobileOverlay.classList.toggle('active');
+    });
+
+    function closeMobileMenu() {
+      mainNav.classList.remove('open');
+      mobileOverlay.classList.remove('active');
+    }
+
+    // Scroll Reveal Animation
+    const revealElements = document.querySelectorAll('.reveal');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          // Stagger animation slightly
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, index * 80);
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -60px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // Header background on scroll
+    const header = document.getElementById('top-header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.style.background = 'rgba(5, 13, 26, 0.9)';
+        header.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.3)';
+      } else {
+        header.style.background = 'rgba(5, 13, 26, 0.7)';
+        header.style.boxShadow = 'none';
+      }
+    });
+  </script>
+
+</body>
+
+</html>
